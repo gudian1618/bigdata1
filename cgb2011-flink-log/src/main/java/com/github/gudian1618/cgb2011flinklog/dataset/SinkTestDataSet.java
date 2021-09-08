@@ -2,43 +2,29 @@ package com.github.gudian1618.cgb2011flinklog.dataset;
 
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.ExecutionEnvironment;
+import org.apache.flink.api.java.operators.AggregateOperator;
 import org.apache.flink.api.java.operators.DataSource;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.util.Collector;
 
-import java.util.ArrayList;
-
 /**
  * @author gudian1618
  * @version v1.0
- * @date 2021/9/8 10:01 下午
- * 针对DataSet数据源的练习
+ * @date 2021/9/8 10:29 下午
+ * 针对DataSet的sink数据输出的练习
  */
 
-public class SourceTestDataSet {
+public class SinkTestDataSet {
 
     public static void main(String[] args) throws Exception {
         // 1.获取执行环境
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
-        // 2.获取数据源
-        // 2.1. env.fromElements("")
-        // ArrayList<String> list = new ArrayList<>();
-        // list.add("陈子枢");
-        // list.add("齐雷");
-        // list.add("王海涛");
-        // list.add("刘沛霞");
-        // list.add("张培镇");
-        // list.add("刘钰江");
-        // list.add("董长春");
-        // list.add("张久军");
-        // 测试中使用
-        // DataSource<String> source = env.fromCollection(list);
 
-        // 2.2.
+        // 2.获取数据源
         DataSource<String> source = env.readTextFile("1.txt");
-        // DataSource<String> source = env.readTextFile("hdfs://hadoop01:9000/data/1.txt");
+
         // 3.转化
-        source.flatMap(new FlatMapFunction<String, Tuple2<String, Integer>>() {
+        AggregateOperator<Tuple2<String, Integer>> data = source.flatMap(new FlatMapFunction<String, Tuple2<String, Integer>>() {
             @Override
             public void flatMap(String s, Collector<Tuple2<String, Integer>> collector) throws Exception {
                 String[] split = s.split(" ");
@@ -46,9 +32,16 @@ public class SourceTestDataSet {
                     collector.collect(new Tuple2<String, Integer>(s1, 1));
                 }
             }
-        }).groupBy(0).sum(1)
-        // 4.输出结果
-        .print();
+        }).groupBy(0).sum(1);
+
+        // 4.输出数据到本地文件
+        // flink在运行时默认会调用服务器中的所有可见资源(比如CPU核和超线程),这里通过链式调用api设定setParallelism设定CPU并行度
+        data.writeAsText("2.txt").setParallelism(1);
+        data.writeAsText("hdfs://hadoop01:9000/data/2.txt").setParallelism(1);
+        System.out.println("执行成功");
+
+        // 5.触发执行(当输出数据为文件时,必须要触发)
+        env.execute("SinkTestDataSet");
     }
 
 }
