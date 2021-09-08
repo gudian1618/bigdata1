@@ -1,0 +1,5 @@
+hadoop hive flume kafka zookeeper hadoop hadoop flink flink
+hadoop hive flume kafka zookeeper hadoop hadoop flink flink
+hadoop hive flume kafka zookeeper hadoop hadoop flink flink
+hadoop hive flume kafka zookeeper hadoop hadoop flink flink
+hadoop hive flume kafka zookeeper hadoop hadoop flink flink
