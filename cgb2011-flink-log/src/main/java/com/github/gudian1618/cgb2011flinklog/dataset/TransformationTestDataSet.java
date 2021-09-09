@@ -1,10 +1,9 @@
 package com.github.gudian1618.cgb2011flinklog.dataset;
 
-import org.apache.flink.api.common.functions.FlatMapFunction;
-import org.apache.flink.api.common.functions.MapPartitionFunction;
+import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.operators.DataSource;
-import org.apache.flink.util.Collector;
+import org.apache.flink.api.java.tuple.Tuple5;
 
 /**
  * @author gudian1618
@@ -21,26 +20,42 @@ public class TransformationTestDataSet {
         // 2.获取数据源
         DataSource<String> source = env.readTextFile("3.txt").setParallelism(3);
         // DataSource<String> source = env.fromElements("hadoop", "hive", "flume", "kafka", "flink");
+
         // 3.Transformation 转化
-        source.flatMap(new FlatMapFunction<String, String>() {
-                @Override
-                public void flatMap(String s, Collector<String> collector) throws Exception {
-                    String[] split = s.split("\\|");
-                    for (String a : split) {
-                        collector.collect(a);
-                    }
-                }
-            })
-            .mapPartition(new MapPartitionFunction<String, Long>() {
+        source.map(new MapFunction<String, Tuple5<String, String, String, String, Integer>>() {
             @Override
-            public void mapPartition(Iterable<String> iterable, Collector<Long> collector) throws Exception {
-                long l = 0;
-                for (String s : iterable) {
-                    l++;
-                }
-                collector.collect(l);
+            public Tuple5<String, String, String, String, Integer> map(String s) throws Exception {
+                String[] a = s.split("\\|");
+                return new Tuple5<>(a[0], a[1], a[2], a[3], Integer.parseInt(a[4]));
             }
-        })
+        }).project(2,0).project(1)
+
+            // .filter(new FilterFunction<String>() {
+            //     @Override
+            //     public boolean filter(String s) throws Exception {
+            //         return s.split("\\|")[2].equals("中国");
+            //     }
+            // })
+
+        //     .flatMap(new FlatMapFunction<String, String>() {
+        //         @Override
+        //         public void flatMap(String s, Collector<String> collector) throws Exception {
+        //             String[] split = s.split("\\|");
+        //             for (String a : split) {
+        //                 collector.collect(a);
+        //             }
+        //         }
+        //     })
+        //     .mapPartition(new MapPartitionFunction<String, Long>() {
+        //     @Override
+        //     public void mapPartition(Iterable<String> iterable, Collector<Long> collector) throws Exception {
+        //         long l = 0;
+        //         for (String s : iterable) {
+        //             l++;
+        //         }
+        //         collector.collect(l);
+        //     }
+        // })
 
         //     .flatMap(new FlatMapFunction<String, String>() {
         //     @Override
@@ -73,8 +88,10 @@ public class TransformationTestDataSet {
             //         return new Tuple5<>(a[0], a[1], a[2], a[3], Integer.parseInt(a[4]));
             //     }
             // })
+
             // 4.sink输出
             .print();
+
         // 5.提交执行
 
     }
