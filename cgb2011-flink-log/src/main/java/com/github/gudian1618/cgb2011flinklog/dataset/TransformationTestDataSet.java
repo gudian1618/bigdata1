@@ -1,9 +1,7 @@
 package com.github.gudian1618.cgb2011flinklog.dataset;
 
-import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.operators.DataSource;
-import org.apache.flink.api.java.tuple.Tuple5;
 
 /**
  * @author gudian1618
@@ -22,14 +20,18 @@ public class TransformationTestDataSet {
         // DataSource<String> source = env.fromElements("hadoop", "hive", "flume", "kafka", "flink");
 
         // 3.Transformation 转化
-        source.map(new MapFunction<String, Tuple5<String, String, String, String, Integer>>() {
-            @Override
-            public Tuple5<String, String, String, String, Integer> map(String s) throws Exception {
-                String[] a = s.split("\\|");
-                return new Tuple5<>(a[0], a[1], a[2], a[3], Integer.parseInt(a[4]));
-            }
-        }).project(2,0).project(1)
+        source
 
+            // ================= project:支持迭代调用,并且能够选择数据进行调换和清洗 ==========================
+        //     .map(new MapFunction<String, Tuple5<String, String, String, String, Integer>>() {
+        //     @Override
+        //     public Tuple5<String, String, String, String, Integer> map(String s) throws Exception {
+        //         String[] a = s.split("\\|");
+        //         return new Tuple5<>(a[0], a[1], a[2], a[3], Integer.parseInt(a[4]));
+        //     }
+        // }).project(2,0).project(1)
+
+            // ================== filter:过滤,满足条件通过,不满足抛弃 =================
             // .filter(new FilterFunction<String>() {
             //     @Override
             //     public boolean filter(String s) throws Exception {
@@ -46,6 +48,8 @@ public class TransformationTestDataSet {
         //             }
         //         }
         //     })
+
+        // =================== mapPartition:分区进行处理,按照并行度或前边的分区操作 ========================
         //     .mapPartition(new MapPartitionFunction<String, Long>() {
         //     @Override
         //     public void mapPartition(Iterable<String> iterable, Collector<Long> collector) throws Exception {
@@ -57,6 +61,7 @@ public class TransformationTestDataSet {
         //     }
         // })
 
+        // ================= flatmap:进一出多 =============================
         //     .flatMap(new FlatMapFunction<String, String>() {
         //     @Override
         //     public void flatMap(String s, Collector<String> collector) throws Exception {
@@ -67,6 +72,7 @@ public class TransformationTestDataSet {
         //     }
         // })
 
+            // ====================== map: javabean ==================
             // .map(new MapFunction<String, Book>() {
             //     @Override
             //     public Book map(String s) throws Exception {
@@ -81,6 +87,7 @@ public class TransformationTestDataSet {
             //     }
             // })
 
+            //===================== map: tuple =======
             //     .map(new MapFunction<String, Tuple5<String, String, String, String, Integer>>() {
             //     @Override
             //     public Tuple5<String, String, String, String, Integer> map(String s) throws Exception {
