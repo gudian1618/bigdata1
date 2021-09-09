@@ -37,7 +37,7 @@ public class SinkTestDataSet {
         // 4.输出数据到本地文件
         // flink在运行时默认会调用服务器中的所有可见资源(比如CPU核和超线程),这里通过链式调用api设定setParallelism设定CPU并行度
         data.writeAsText("2.txt").setParallelism(1);
-        data.writeAsText("hdfs://hadoop01:9000/data/2.txt").setParallelism(1);
+        // data.writeAsText("hdfs://hadoop01:9000/data/2.txt").setParallelism(1);
         System.out.println("执行成功");
 
         // 5.触发执行(当输出数据为文件时,必须要触发)
