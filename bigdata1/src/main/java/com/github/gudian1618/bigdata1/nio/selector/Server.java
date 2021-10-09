@@ -81,14 +81,13 @@ public class Server {
                     ByteBuffer buffer = ByteBuffer.wrap("hello client".getBytes());
                     // 写出数据
                     sc.write(buffer);
-                    //
+                    // 移除write事件
+                    sc.register(selc, key.interestOps() - SelectionKey.OP_WRITE);
                 }
                 it.remove();
             }
 
-
         }
-
 
     }
 
