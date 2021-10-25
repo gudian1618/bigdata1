@@ -21,6 +21,10 @@ public class ConcurrentNavigableMapDemo {
         map.put("i", 87);
         map.put("t", 91);
         System.out.println(map);
+        // 左闭右开区间
+        System.out.println(map.headMap("s"));
+        System.out.println(map.tailMap("s"));
+        System.out.println(map.subMap("g", "y"));
     }
 
 }
