@@ -1,7 +1,7 @@
 package com.github.gudian1618.bigdata1.lock;
 
 import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * @author gudian1618
@@ -14,7 +14,11 @@ public class LockDemo01 {
     static int i = 0;
 
     public static void main(String[] args) throws InterruptedException {
-        Lock lock = new ReentrantLock();
+        // Lock lock = new ReentrantLock();
+        // 获取读写锁
+        ReentrantReadWriteLock rw = new ReentrantReadWriteLock();
+        // 获取写锁
+        Lock lock = rw.writeLock();
         new Thread(new Add(lock)).start();
         new Thread(new Add(lock)).start();
         // 主函数所在的类也是一个线程,那么主线程和其他线程强占CPU执行权
