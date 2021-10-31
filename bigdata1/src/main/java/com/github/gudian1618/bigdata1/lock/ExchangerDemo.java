@@ -12,7 +12,9 @@ import java.util.concurrent.Exchanger;
 public class ExchangerDemo {
 
     public static void main(String[] args) {
-
+        Exchanger<String> ex = new Exchanger<>();
+        new Thread(new Producer(ex)).start();
+        new Thread(new Consumer(ex)).start();
     }
 
 }
@@ -49,6 +51,14 @@ class Consumer implements Runnable {
 
     @Override
     public void run() {
-        
+        // 消费者准备钱
+        String info = "钱";
+        // 消费者交换钱给生产者,同时接收到生产者发过来的商品
+        try {
+            String msg = exchanger.exchange(info);
+            System.out.println("消费者收到了生产者交换过来的" + msg);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
