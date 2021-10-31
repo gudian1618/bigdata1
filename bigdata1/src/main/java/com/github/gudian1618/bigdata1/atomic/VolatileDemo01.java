@@ -9,7 +9,7 @@ package com.github.gudian1618.bigdata1.atomic;
 public class VolatileDemo01 {
 
     public static void main(String[] args) {
-        Date d = new Date();
+        Data d = new Data();
         d.i = 10;
         // 线程A
         new Thread(new Runnable() {
@@ -42,6 +42,6 @@ public class VolatileDemo01 {
 
 }
 
-class Date {
+class Data {
     volatile int i;
 }
