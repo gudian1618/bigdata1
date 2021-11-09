@@ -1,6 +1,7 @@
 package com.github.gudian1618.bigdata1.zookeeper;
 
 import org.apache.zookeeper.*;
+import org.apache.zookeeper.data.Stat;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,6 +56,26 @@ public class ZookeeperDemo01 {
         // 返回值 节点名
         String s = zk.create("/log", "hello zookeeper".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
         System.out.println(s);
+    }
+
+    // 修改节点数据
+    @Test
+    public void setData() throws InterruptedException, KeeperException {
+        // Path 节点的路径
+        // data 节点的数据
+        // version 节点的信息列表
+        // 当客户端尝试修改数据的时候,会校验version和节点的dataversion是否一致
+        // 如果不想受版本控制,设置0或-1
+        Stat stat = zk.setData("/log", "hello log".getBytes(), -1);
+        System.out.println(stat);
+    }
+
+    // 获取节点数据
+    @Test
+    public void getData() throws InterruptedException, KeeperException {
+        Stat s = new Stat();
+        byte[] data = zk.getData("/log", null, s);
+        System.out.println(new String(data));
     }
 
 }
