@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -76,6 +77,29 @@ public class ZookeeperDemo01 {
         Stat s = new Stat();
         byte[] data = zk.getData("/log", null, s);
         System.out.println(new String(data));
+    }
+
+    // 获取子节点
+    @Test
+    public void getChildren() throws InterruptedException, KeeperException {
+        // 将子节点的名字放在List中返回
+        List<String> children = zk.getChildren("/", null);
+        for (String child : children) {
+            System.out.println(child);
+        }
+    }
+
+    // 删除节点
+    @Test
+    public void deleteNode() throws InterruptedException, KeeperException {
+        zk.delete("/log", -1);
+    }
+
+    // 判断节点是否存在
+    @Test
+    public void exists() throws InterruptedException, KeeperException {
+        Stat s = zk.exists("/log", null);
+        System.out.println(s != null);
     }
 
 }
