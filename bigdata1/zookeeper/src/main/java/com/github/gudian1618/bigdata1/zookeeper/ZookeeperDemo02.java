@@ -13,6 +13,7 @@ import java.util.concurrent.CountDownLatch;
  * @author gudian1618
  * @version v1.0
  * @date 2021/11/9 6:47 下午
+ * 练习
  */
 
 public class ZookeeperDemo02 {
