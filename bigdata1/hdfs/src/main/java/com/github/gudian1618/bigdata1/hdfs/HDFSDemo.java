@@ -73,8 +73,13 @@ public class HDFSDemo {
 
     // 删除文件
     @Test
-    public void delete() {
-
+    public void delete() throws IOException, InterruptedException {
+        // 连接文件系统
+        FileSystem fs = FileSystem.get(uri, conf, "root");
+        // 删除文件或者目录
+        fs.delete(new Path("/txt"),true);
+        // 关闭资源
+        fs.close();
     }
 
 
