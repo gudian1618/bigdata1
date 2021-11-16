@@ -1,8 +1,8 @@
 package com.github.gudian1618.bigdata1.mapreduce.charcount;
 
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 
