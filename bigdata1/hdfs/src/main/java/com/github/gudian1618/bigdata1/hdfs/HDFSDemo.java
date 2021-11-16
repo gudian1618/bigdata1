@@ -43,9 +43,9 @@ public class HDFSDemo {
         // 连接文件系统
         FileSystem fs = FileSystem.get(uri, conf, "root");
         // 指定存储路径 - 返回输出流用于将数据写入
-        FSDataOutputStream out = fs.create(new Path("/txt/a.xml"));
+        FSDataOutputStream out = fs.create(new Path("/txt/characters.txt"));
         // 构建输入流,指定要上传的文件
-        FileInputStream in = new FileInputStream("/Users/zyd/Desktop/达内大数据学习/大数据高级开发工程师-课程资料及笔记/03-Hadoop/hadoop/tar/pom.xml");
+        FileInputStream in = new FileInputStream("/Users/zyd/Desktop/达内大数据学习/大数据高级开发工程师-课程资料及笔记/03-Hadoop/hadoop/txt/characters.txt");
         // 上传文件
         IOUtils.copyBytes(in, out, conf);
         // 关闭流
