@@ -12,6 +12,7 @@
         <module>zookeeper</module>
         <module>avro</module>
         <module>hdfs</module>
+        <module>mapreduce</module>
     </modules>
 
     <properties>
