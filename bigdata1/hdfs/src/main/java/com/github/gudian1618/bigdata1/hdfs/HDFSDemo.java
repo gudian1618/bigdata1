@@ -43,9 +43,9 @@ public class HDFSDemo {
         // 连接文件系统
         FileSystem fs = FileSystem.get(uri, conf, "root");
         // 指定存储路径 - 返回输出流用于将数据写入
-        FSDataOutputStream out = fs.create(new Path("/txt/characters.txt"));
+        FSDataOutputStream out = fs.create(new Path("/txt/commonfriend.txt"));
         // 构建输入流,指定要上传的文件
-        FileInputStream in = new FileInputStream("/Users/zyd/Desktop/达内大数据学习/大数据高级开发工程师-课程资料及笔记/03-Hadoop/hadoop/txt/characters.txt");
+        FileInputStream in = new FileInputStream("/Users/zyd/Desktop/达内大数据学习/大数据高级开发工程师-课程资料及笔记/03-Hadoop/hadoop/txt/commonfriend.txt");
         // 上传文件
         IOUtils.copyBytes(in, out, conf);
         // 关闭流
@@ -78,7 +78,7 @@ public class HDFSDemo {
         FileSystem fs = FileSystem.get(uri, conf, "root");
         // 删除文件或者目录
         // fs.delete(new Path("/txt"),true);
-        fs.delete(new Path("/result"),true);
+        fs.delete(new Path("/result/word_count"),true);
         // 关闭资源
         fs.close();
     }
