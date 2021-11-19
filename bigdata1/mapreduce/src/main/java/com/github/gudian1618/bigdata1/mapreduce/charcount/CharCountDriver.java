@@ -32,6 +32,9 @@ public class CharCountDriver {
         // 设置Reduce类
         job.setReducerClass(CharCountReducer.class);
 
+        // 设置combiner类
+        job.setCombinerClass(CharCountReducer.class);
+
         // 设置mapper的输出类型
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(LongWritable.class);
