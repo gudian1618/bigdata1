@@ -1,7 +1,5 @@
 package com.github.gudian1618.bigdata1.mapreduce.multipleinput;
 
-import com.github.gudian1618.bigdata1.mapreduce.authinput.AuthMapper;
-import com.github.gudian1618.bigdata1.mapreduce.authinput.AuthReducer;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
