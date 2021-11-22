@@ -5,7 +5,6 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.compress.BZip2Codec;
-import org.apache.hadoop.io.compress.CompressionCodec;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
@@ -26,9 +25,9 @@ public class CompressDriver {
         Configuration conf = new Configuration();
         // 设置压缩参数
         // 开启mapper结果的压缩机制
-        conf.set("mapreduce.map.output.compress", "true");
+        // conf.set("mapreduce.map.output.compress", "true");
         // 设置压缩编码类
-        conf.setClass("mapreduce.map.output.compress.codec", BZip2Codec.class, CompressionCodec.class);
+        // conf.setClass("mapreduce.map.output.compress.codec", BZip2Codec.class, CompressionCodec.class);
         Job job = Job.getInstance(conf);
 
         job.setJarByClass(CompressDriver.class);
@@ -43,6 +42,10 @@ public class CompressDriver {
         MultipleInputs.addInputPath(job, new Path("hdfs://192.168.1.200:9000/txt/words.txt"), TextInputFormat.class);
 
         FileOutputFormat.setOutputPath(job, new Path("hdfs://192.168.1.200:9000/result/compress"));
+
+        // 对Reduce结果进行压缩
+        FileOutputFormat.setCompressOutput(job,true);
+        FileOutputFormat.setOutputCompressorClass(job, BZip2Codec.class);
 
         job.waitForCompletion(true);
     }
