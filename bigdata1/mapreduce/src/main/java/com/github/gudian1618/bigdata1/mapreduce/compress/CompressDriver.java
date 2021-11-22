@@ -46,6 +46,8 @@ public class CompressDriver {
         // 对Reduce结果进行压缩
         FileOutputFormat.setCompressOutput(job,true);
         FileOutputFormat.setOutputCompressorClass(job, BZip2Codec.class);
+        // FileOutputFormat.setOutputCompressorClass(job, DefaultCodec.class);
+        // FileOutputFormat.setOutputCompressorClass(job, ZStandardCodec.class);
 
         job.waitForCompletion(true);
     }
