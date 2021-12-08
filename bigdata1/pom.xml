@@ -13,6 +13,7 @@
         <module>avro</module>
         <module>hdfs</module>
         <module>mapreduce</module>
+        <module>flume</module>
     </modules>
 
     <properties>
