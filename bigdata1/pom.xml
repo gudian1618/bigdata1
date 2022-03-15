@@ -14,6 +14,7 @@
         <module>hdfs</module>
         <module>mapreduce</module>
         <module>flume</module>
+        <module>hive</module>
     </modules>
 
     <properties>
