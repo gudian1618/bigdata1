@@ -1,6 +1,9 @@
+import scala.util.control.Breaks.{break, breakable}
+
 /**
  * 1.scala的异常处理机制痛java,只不过形式上有区别,在catch是通过case来匹配异常然后进行处理
  * 2.match case 只要发现有一个匹配,则剩余case不会执行,直接跳出
+ * 3.break在循环外面是跳出循环,在循环里面是continue
  */
 
 object Demo05 {
@@ -34,10 +37,25 @@ object Demo05 {
   }
 
   val s2 = 8
-  s2 match{
-    case x if x>=5=>{println("555")}
-    case x if x>=6=>{println("666")}
-    case x if x>=7=>{println("7777")}
+  s2 match {
+    case x if x >= 5 => {
+      println("555")
+    }
+    case x if x >= 6 => {
+      println("666")
+    }
+    case x if x >= 7 => {
+      println("7777")
+    }
   }
 
+  breakable(
+    for (i <- 1.to(10)) {
+      if (i > 8) {
+        break
+      } else {
+        println(i)
+      }
+    }
+  )
 }
