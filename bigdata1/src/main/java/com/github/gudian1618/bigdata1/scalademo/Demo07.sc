@@ -45,4 +45,18 @@ object Demo07 {
 
   f5("hello",2,(a: String,b: Int)=>(a*b))
 
+  def f6(a: Int, b: Int,f:(Int, Int) => Unit) = {
+    f(a,b)
+  }
+
+  f6(1,5,(a: Int, b: Int)=>{for (i<-a.to(b))println(i)})
+
+  def f7(a:String,f:(String)=>Array[String]) ={
+    f(a)
+  }
+
+  f7("hello.txt",(a:String)=>{a.split("\\.")})
+
+
+
 }
