@@ -12,6 +12,8 @@ object Demo02 {
   // 写递归函数的技巧:
   // 1.找到结束条件
   // 2.找到项与项之间的函数关系,即递归通项式函数找到
+
+  // 2 3 4 9 16 81 ...
   def f1(n: Int): Int = {
     if (n == 0) return 1
     if (n == 1) return 2
@@ -23,6 +25,24 @@ object Demo02 {
   f1(5)
   f1(7)
 
+  def f2(n: Int): Int = {
+    if (n == 0) return 2
+    if (n == 1) return 3
+    else f2(n - 2) * f2(n - 2)
+  }
 
+  f2(4)
 
+  // 2 3 4 9 8 27 16 81 ...
+  def f3(n: Int): Int = {
+    if (n == 0) return 2
+    if (n == 1) return 3
+    if (n % 2 == 0) 2 * f3(n - 2)
+    else 3 * f3(n - 2)
+  }
+
+  f3(4)
+  f3(7)
+
+  
 }
