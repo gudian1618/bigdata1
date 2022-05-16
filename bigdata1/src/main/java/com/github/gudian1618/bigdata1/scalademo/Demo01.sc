@@ -15,6 +15,8 @@ object Demo01 {
 
   val s1 = "hello world"
 
+  println(s1)
+
   s1.take(2)
   s1 take 2
 
