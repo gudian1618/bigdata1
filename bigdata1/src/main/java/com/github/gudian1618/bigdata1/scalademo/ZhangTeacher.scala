@@ -1,6 +1,6 @@
 package com.github.gudian1618.bigdata1.scalademo
 
-class ZhangTeacher extends Teacher with Dance with Drive{
+class ZhangTeacher extends Dance with Drive{
 
   def makeNote(info: String) = {
     ???
