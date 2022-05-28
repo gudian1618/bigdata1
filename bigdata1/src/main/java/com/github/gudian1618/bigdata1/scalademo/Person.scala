@@ -4,17 +4,22 @@ package com.github.gudian1618.bigdata1.scalademo
  * @author gudian1618
  * @date 2022/4/17 12:27
  * @version v1.0
- */
+ *          scala同java通过class来定义一个类
+ *          scala的类可以拥有成员变量和成员方法
+ *          定义成员变量时,必须赋值初始值,用于推断变量类型 */
+class Person(n: String, a: Int) {
 
-class Person {
+  var name = n
+  var age = a
 
-  // 成员函数
-  def eat()={
-    println("吃食物")
+  def say() = {
+    println("hello world")
+  }
 
-    // 本地函数
-    def cook() ={
-      println("做饭")
-    }
+}
+
+object Person {
+  def speak() = {
+    println("hello world")
   }
 }
