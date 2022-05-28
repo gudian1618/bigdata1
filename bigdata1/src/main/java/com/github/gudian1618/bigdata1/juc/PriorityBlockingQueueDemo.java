@@ -1,8 +1,5 @@
 package com.github.gudian1618.bigdata1.juc;
 
-import java.util.Comparator;
-import java.util.concurrent.PriorityBlockingQueue;
-
 /**
  * @author gudian1618
  * @version v1.0
@@ -24,24 +21,24 @@ public class PriorityBlockingQueueDemo {
         // }
 
         // 在创建队列的时候,如果希望队列中的元素可以按照年纪进行升序排序
-        Comparator<Student> c = new Comparator<>() {
-            @Override
-            public int compare(Student o1, Student o2) {
-                return o1.getAge()- o2.getAge();
-            }
-        };
-        PriorityBlockingQueue<Student> queue = new PriorityBlockingQueue<>(5,c);
-        queue.put(new Student("zhangsan", 18, 90));
-        queue.put(new Student("lisi", 48, 80));
-        queue.put(new Student("wangwu", 58, 70));
-        queue.put(new Student("zhaoliu", 28, 60));
-        queue.put(new Student("tainqi", 38, 50));
-        // for (int i = 0; i < 5; i++) {
-        //     System.out.println(queue.take());
+        // Comparator<Student> c = new Comparator<>() {
+        //     @Override
+        //     public int compare(Student o1, Student o2) {
+        //         return o1.getAge()- o2.getAge();
+        //     }
+        // };
+        // PriorityBlockingQueue<Student> queue = new PriorityBlockingQueue<>(5,c);
+        // queue.put(new Student("zhangsan", 18, 90));
+        // queue.put(new Student("lisi", 48, 80));
+        // queue.put(new Student("wangwu", 58, 70));
+        // queue.put(new Student("zhaoliu", 28, 60));
+        // queue.put(new Student("tainqi", 38, 50));
+        // // for (int i = 0; i < 5; i++) {
+        // //     System.out.println(queue.take());
+        // // }
+        // for (Student s : queue) {
+        //     System.out.println(s);
         // }
-        for (Student s : queue) {
-            System.out.println(s);
-        }
     }
 
 }

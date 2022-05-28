@@ -1,4 +1,4 @@
-import com.github.gudian1618.bigdata1.scalademo.Person
+import com.github.gudian1618.bigdata1.scalademo.{Person, Util}
 
 object Demo04{
 
@@ -8,5 +8,7 @@ object Demo04{
 
     p1.say()
 
+    Util.cook()
+    Person.speak()
 
 }
