@@ -27,7 +27,7 @@ object Demo05 {
   "hello.zip".prefix()
 
 
-  // 隐式参数(隐式对象)
+  // 隐式参数(隐式对象)                                                   
   // 泛型[]
   trait Adder[T] {
     def add(x:T,y:T):T
