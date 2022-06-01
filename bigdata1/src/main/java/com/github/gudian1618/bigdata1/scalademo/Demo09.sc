@@ -69,4 +69,14 @@ object Demo09 {
   l4.filter{line=>line.contains("M")}
   l4.filter{line=>line.split(" ")(1).equals("M")}
 
+  l4.filter{line=>line.split(" ")(2).toInt>20}
+
+  val l5 = List(1,2,3,4,5)
+
+  // exists方法是根据指定的匿名函数规则判断元素是否存在
+  l5.exists{num=>num>2}
+
+  // map方法是映射方法,将集合中的元素从一个形式映射转换成另一种 形式
+  l5.map{num=>num*2}
+
 }
