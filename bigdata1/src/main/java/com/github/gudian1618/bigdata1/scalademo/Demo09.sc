@@ -79,4 +79,47 @@ object Demo09 {
   // map方法是映射方法,将集合中的元素从一个形式映射转换成另一种 形式
   l5.map{num=>num*2}
 
+  l5.map{num=>num.toString}
+
+  val l6 = List("hello world","hello scala")
+
+  l6.map{line=>line.split(" ")}
+
+  val l7 = List("tom M 23","rose F 18","jim M 30")
+
+  l7.map{line=>line.split(" ")(0)}
+  l7.map{line=>line.split(" ")(2).toInt}.sum
+  val r13 = l7.filter{line=>line.split(" ")(1).equals("M")}.map{line=>line.split(" ")(2).toInt}
+
+  val 14 = r13.sum/r13.length
+
+  val l8 = List(1,2,3,4)
+
+  l8.reduce{(a,b) => a + b}
+  l8.reduce{(a,b) => a * b}
+
+  val l19 = List(3,1,5,2,4)
+
+  l19.reduce{(a,b)=>if (a>b) a else b}
+  l19.sortBy{num=> num}.reverse
+  l19.sortBy{num=> -num}
+
+  val l10 = List("b 3","a 4","c 2","d 1")
+
+  l10.sortBy{line=> -line.split(" ")(1).toInt}
+  l10.sortBy{line=> line.split(" ")(0)}.reverse
+  l10.sortBy{line=> line}.reverse
+
+  val l11 = List("tom M 23","rose F 18","jim M 20","andy M 35")
+
+  l11.filter{line=> line.split(" ")(1).equals("M")}.sortBy{line=> line.split(" ")(2).toInt}.take(2).map {line=>line.split(" ")(2).toInt}.sum
+  l11.foreach{x=>println(x)}
+
+  val a11 = l11.toArray
+  val l12 = a11.toList
+
+  val l13 = List(1,2,3)
+  // 基于定长List拼接的元素
+  val l14 = l13.::(5)
+
 }
