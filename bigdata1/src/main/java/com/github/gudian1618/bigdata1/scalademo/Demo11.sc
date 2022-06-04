@@ -14,4 +14,10 @@ object Demo11 {
   // 扁平化映射,一般用于读取文件后,处理每行数据,获取行中的单个数据
   val r5 = l2.flatMap{ line => line.split(" ")}
 
+  // 统计l2中的单词出现的频度,比如返回的结果(hello,3)
+  val r6 = l2.flatMap{ line => line.split(" ")}.groupBy{ word => word }.map{case (k,v) =>(k,v.length)}
+
+//  val r7 = l2.flatMap{ line => line.split(" ")}.groupBy{ word => word }.mapValues{ v=>v.length}
+
+
 }
